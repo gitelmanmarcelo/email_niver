@@ -16,7 +16,7 @@ def enviar_email(assunto, corpo):
 
     # Configuração para Brevo/SendGrid
     smtp_server = os.getenv("SMTP_SERVER")  # ex: smtp-relay.brevo.com
-    smtp_port = 587
+    smtp_port = 2525
 
     try:
         # Usando o protocolo STARTTLS para portas 587
