@@ -11,7 +11,7 @@ def enviar_email(assunto, corpo):
     msg = EmailMessage()
     msg.set_content(corpo)
     msg['Subject'] = assunto
-    msg['From'] = "aniversarios@seu-alerta.com"  # Pode ser qualquer nome
+    msg['From'] = "marcelo.gitelman@gmail.com"  # Pode ser qualquer nome
     msg['To'] = os.getenv("EMAIL_DESTINO")
 
     # Configuração para Brevo/SendGrid
