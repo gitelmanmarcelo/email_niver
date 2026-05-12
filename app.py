@@ -12,7 +12,8 @@ def enviar_email(assunto, corpo):
     msg.set_content(corpo)
     msg['Subject'] = assunto
     msg['From'] = "marcelo.gitelman@gmail.com"  # Pode ser qualquer nome
-    msg['To'] = os.getenv("EMAIL_DESTINO")
+    destinatarios = [e.strip() for e in os.getenv("EMAIL_DESTINO").split(',')]
+    msg['To'] = ", ".join(destinatarios)
 
     # Configuração para Brevo/SendGrid
     smtp_server = os.getenv("SMTP_SERVER")  # ex: smtp-relay.brevo.com
@@ -43,7 +44,7 @@ def check_birthdays():
     if msg_corpo:
         enviar_email("Lembrete de Aniversário 🎂", msg_corpo)
         return "E-mail enviado!", 200
-    return "Nenhum aniversariante encontrado.", 200
+    enviar_email("Nenhum aniversário para hoje ou amanhã. Tudo tranquilo!")
 
 
 if __name__ == "__main__":
