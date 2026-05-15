@@ -28,6 +28,11 @@ def enviar_email(assunto, corpo):
     except Exception as e:
         print(f"Erro ao enviar: {e}")
 
+@app.route('/health-check')
+def health_check():
+    return "ok", 200
+
+
 @app.route('/check-birthdays')
 def check_birthdays():
     df = pd.read_csv('eventos.csv')
