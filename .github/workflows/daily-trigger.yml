@@ -1,0 +1,21 @@
+name: Daily Email Trigger
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # 3am UTC (ajuste para seu horário)
+workflow_dispatch:
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Warm up Render
+        run: curl --max-time 90 https://email-niver.onrender.com/health-check || true
+
+      - name: Aguardar boot completo
+        run: sleep 60
+
+      - name: Disparar job principal
+        run: |
+          curl --fail --max-time 30 \
+          https://email-niver.onrender.com/check-birthdays
